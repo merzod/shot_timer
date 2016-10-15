@@ -21,7 +21,7 @@ Context::Context() {
   
   settings = new Setting *[settingCapacity];
   initSetting(SETTING_MIN_SPLIT,     "MIN_SPLIT/100", 1, 2, 100);
-  initSetting(SETTING_MIC_THRESHOLD, "MIC_THRESHOLD", 1, 3, 1000);
+  initSetting(SETTING_MIC_THRESHOLD, "MIC_THRESHOLD", 1, 1, 100);
   initSetting(SETTING_START_DELAY,   "START_DELAY(s)", 1, 0, 30);
   initSetting(SETTING_LIGHT_DELAY,   "LIGHT_DELAY(s)", 1, 0, 30);
   initSetting(SETTING_BUZZER_DELAY,  "BUZZER_DELAY/10", 1, 0, 10);

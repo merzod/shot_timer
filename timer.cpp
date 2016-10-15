@@ -28,7 +28,7 @@ void TimerMode::loop() {
         if(context->getSetting(SETTING_DEBUG_SENSOR)) {
           Serial.println(sensorVal);
         }
-        if(sensorVal > lastSensorVal + context->getSetting(SETTING_MIC_THRESHOLD)) { 
+        if(sensorVal > lastSensorVal + (context->getSetting(SETTING_MIC_THRESHOLD)*10)) { 
           boom(millis());
         }
         lastSensorVal = sensorVal;
@@ -117,7 +117,7 @@ void TimerMode::print(int shot) {
   context->lcd->print("First:", 2, 12);
   context->lcd->print("Split:", 2, 20);
   if(context->getSetting(SETTING_DEBUG_SENSOR)) {
-    context->lcd->printNumI(maxSensorVal, 62, 2);
+    context->lcd->printNumI(maxSensorVal/10, 62, 2);
   }
   switch (mode) {
     case MODE_READY:
