@@ -160,8 +160,15 @@ void TimerMode::print(int shot) {
   context->lcd->setFont(TinyFont);
   
   int batt = analogRead(BATT_PIN);
-  double b = ((double)batt * 5.39 )/1023;
-  context->lcd->printBatt(60, 41, b);
+  double b = ((double)batt * 5.39 )/1023; // 5.39 kof. gives 4.2 on full charge
+  // print battarey state
+  if(context->getSetting(SETTING_DEBUG_SENSOR)) {
+    context->lcd->printBatt(60, 41, b);
+  } else {
+    double d = b >= 3.6 ? b - 3.6 : 3.6; // min cell voltage = 3.6
+    int percent = d * 100 / 0.6; // max cell voltage - min cell voltage (4.2 - 3.6 = 0.6)
+    context->lcd->printBattPercent(77, 41, percent);  
+  }
 
   context->lcd->update();
 }
